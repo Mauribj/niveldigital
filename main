@@ -37,10 +37,10 @@ void updateFiltered()
 
 void setup()
 {
+  lcd.begin(16, 2);
   Serial.begin(115200);
   Wire.begin();
   mpu.initialize();
-  lcd.begin(16, 2);
   Serial.println(mpu.testConnection() ? F("IMU iniciado correctamente") : F("Error al iniciar IMU"));
 }
 
@@ -53,16 +53,16 @@ void loop()
   updateFiltered();
 
   Serial.print(F("Rotacion en X:  "));
-  Serial.print(ang_x);
+  Serial.print(ang_x * -1);
   Serial.print(F("\t Rotacion en Y: "));
-  Serial.println(ang_y);
+  Serial.println(ang_y * -1);
   lcd.clear();
   lcd.setCursor(0,0);         //empieza escribiendo en la primera linea
-  lcd.print("X: ");
-  lcd.print(ang_x);
-  lcd.setCursor(0,1);         //escribe en la linea de abajo
   lcd.print("Y: ");
-  lcd.println(ang_y);
+  lcd.println(ang_y * -1);
+  lcd.setCursor(0,1);         //escribe en la linea de abajo
+  lcd.print("X: ");
+  lcd.print(ang_x * -1);
   
   delay(10);
 }
